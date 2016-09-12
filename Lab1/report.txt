@@ -1,0 +1,46 @@
+---------------------------------------------------
+Section 3.1: Golman-Hodgkin-Katz equation
+
+• Calculate the membrane resting potential for the values in the table
+above of ion specific permeabilities (P) and intracellular (Cin) and
+extracellular (Cout) ion concentrations (in mol/l, “molar” designated
+by M).
+
+-67.45 mV
+
+• Interchange the Cin with Cout for all ions and calculate resting
+  potential again. How does it relate to the above?
+
+67.45 mV
+
+• What is the resting potential if only the K permeability is
+  non-zero?
+
+-93.14 mV
+
+• What is the resting potential if only the Na permeability is non-zero?
+
+56.0322 mV
+
+
+Section 3.2: Golman-Hodgkin-Katz current equation
+
+• What is Im at a Vm of –70mV and 0 mV? What is the dimension of Im?
+
+Im(Vm = -70mV) = -0.003 mA because we are close to resting membrane potential
+
+• Calculate the I-V relationship of the membrane for the same conditions as above (use GHK-I and step V from –80 to 80 mV in steps of 5 mV). Draw the I(V) curve.
+
+Look at Figure: ghk_3_5.jpg
+
+---------------------------------------------------
+Section 4: Spherical membrane compartment
+
+• What is Im at Vm = –50 mV?
+• What is the total membrane conductance of the cell at –50 mV?
+• Plot the time course of Vm!
+• Estimate by inspection an approximate value of τm during these conditions.
+• Plot the time course of Vm under these conditions. Verify that your
+• dynamic value for the potential of the peak and the potential towards the end of the simulation approaches that calculated from GHK_V in section 3!
+• What, if any, difference do you see between the whole cell and the spine head with regard to e.g. Im and Vm (t)?
+---------------------------------------------------
