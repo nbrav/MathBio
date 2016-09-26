@@ -1,0 +1,74 @@
+%%% Lab 2
+clear all
+close all
+
+%% obtain parameters for provided function
+
+% equilibrium constant 
+
+R = 8.314;                                  % molar gas constant
+T = 293;                                    % [K] temperature
+delta_G_node = -3.5*4.1868*1000;            % [J/mol] 
+
+K = exp(-delta_G_node/R/T);                 % equilibrium constant
+
+% fact 1
+K_m_1 = 8e-3;                                  % [mM] or 8e-3???
+
+% fact 2
+K_x = 3e-6;                                 % [mM] dissociation constant
+
+% fact 4
+n = 2.5;
+
+% fact 3
+% K_m_1 = 0.8;                              % [mM] 
+S_3 = 0.8e-3;                                  % [mM]
+sigma = S_3/K_m_1;                  
+
+alpha = 1/sigma^n;
+
+% fact 5
+V_f = 100/(180);                       % [mM/s] limiting rate
+
+
+%% plot test function to confirm understanding
+% i = 1;
+% S_test = zeros((0.05/0.001 + 1), 1);
+% j_test = zeros((0.05/0.001 + 1), 1);
+% for S=0:0.001:0.05
+%     j_test(i) = test_L2_1_simplified(S,0);
+%     S_test(i) = S;
+%     i = i+1;
+% end
+% figure
+% plot(S_test, j_test)
+% grid on
+% hold on
+% 
+% half_activation_index = find((j_test >= 0.5),1);
+% j_test_min = min(j_test);
+% j_test_max = max(j_test);
+% plot([S_test(half_activation_index) S_test(half_activation_index)],[j_test_min, j_test_max], 'k');
+% plot([S_test(1) S_test(end)], [0.5 0.5], 'k') 
+
+
+%% derive actual equation and simulate
+% j = modulated_reversible_Hill( S,X,alpha, n, V_f, K_m_1, K_x )
+i = 1;
+S_1 = zeros((0.05/0.001 + 1), 1);
+j_1 = zeros((0.05/0.001 + 1), 1);
+figure
+hold on
+grid on
+for X = [0 0.0000001 0.0000005 0.000001 0.000005 1]
+    for S=0:0.0001:0.05
+        j_1(i) = modulated_reversible_Hill( S,X,alpha, n, V_f, K_m_1, K_x )/V_f;
+        S_1(i) = S;
+        i = i+1;
+    end
+    plot(S_1, j_1)
+    i = 1;
+end
+
+
