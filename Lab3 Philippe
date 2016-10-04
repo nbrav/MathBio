@@ -1,1 +1,182 @@
 
+%% initialise parameters
+clear all
+close all
+
+c=[1,-1,1,-1];
+D=[1,3];
+r=[0.1,0.1];
+
+T = 3000;                                                   % Simulation time
+N=50;                                                       % Number of cells
+
+
+%% Question 1
+
+
+
+% initial state in first field
+a = zeros(N,1);
+b = zeros(N,1);
+a(1) = 0.14;
+
+[ff_a, ff_b] = DGL_1D( a,b,T,N,c,D,r );
+
+figure
+subplot(2,2,1)
+mesh(ff_a')
+title('a:a(1)')
+subplot(2,2,2)
+mesh(ff_b')
+title('b:a(1)')
+
+% initial state in 25th field
+a = zeros(N,1);
+b = zeros(N,1);
+a(25) = 0.14;
+
+[ff_a, ff_b] = DGL_1D( a,b,T,N,c,D,r );
+
+subplot(2,2,3)
+mesh(ff_a')
+title('a:a(25)')
+subplot(2,2,4)
+mesh(ff_b')
+title('b:a(25)')
+
+
+
+%% Question 2
+
+% initial state in first field
+a=zeros(N,1)+rand(N,1);                                 % Random initial state
+b=zeros(N,1)+rand(N,1);                                 % Random initial state
+a(1) = 0.14;
+
+[ff_a, ff_b] = DGL_1D( a,b,T,N ,c,D,r);
+
+figure
+subplot(2,2,1)
+mesh(ff_a')
+title('a:noise:1')
+subplot(2,2,2)
+mesh(ff_b')
+title('b:noise:1')
+
+% initial state in 25th field
+a=zeros(N,1)+5*rand(N,1);                                 % Random initial state
+b=zeros(N,1)+5*rand(N,1);                                 % Random initial state
+a(1) = 0.14;
+
+[ff_a, ff_b] = DGL_1D( a,b,T,N,c,D,r);
+
+subplot(2,2,3)
+mesh(ff_a')
+title('a:noise:5')
+subplot(2,2,4)
+mesh(ff_b')
+title('b:noise:5')
+
+%% Question 3
+
+D = [0,1,2,3,4];
+
+a=zeros(N,1);                                 % Random initial state
+b=zeros(N,1);                                 % Random initial state
+a(1) = 0.14;
+
+plot_size = 5;
+
+for i=1:plot_size
+   for j = 1:plot_size
+       
+       
+       [ff_a, ff_b] = DGL_1D( a,b,T,N,c,[D(i),D(j)],r);
+       subplot(plot_size,plot_size,(plot_size*(i-1) + j))
+       mesh(ff_a')
+       title(sprintf('D_a = %i, D_b = %i',D(i),D(j)))
+       
+       
+       a=zeros(N,1);                                 % Random initial state
+       b=zeros(N,1);                                 % Random initial state
+       a(1) = 0.14;
+   end
+end
+
+
+
+%% Question 4
+
+
+c_j=[-2.0000, -1.8000,-1.6000,-1.4000,-1.3,-1.25,-1.200, -1.0000];
+a=zeros(N,1);                                 % Random initial state
+b=zeros(N,1);                                 % Random initial state
+a(1) = 0.14;
+
+plot_size = 8;
+
+for j = 1:plot_size
+
+
+   [ff_a, ff_b] = DGL_1D( a,b,T,N,[c(1),c_j(j),c(3),c(4)],D,r);
+   subplot(2,plot_size/2, j)
+   mesh(ff_a')
+   title(sprintf('c_2 = %f',c_j(j)))
+
+
+   a=zeros(N,1);                                 % Random initial state
+   b=zeros(N,1);                                 % Random initial state
+   a(1) = 0.14;
+end
+
+
+
+%% Question 5
+
+c_j=1:2:15                %fliplr([2, 1.8,1.6,1.4,1.3,1.25,1.2, 1]);
+a=zeros(N,1);                                 % Random initial state
+b=zeros(N,1);                                 % Random initial state
+a(1) = 0.14;
+
+plot_size = 8;
+
+for j = 1:plot_size
+
+
+   [ff_a, ff_b] = DGL_1D( a,b,T,N,[c_j(j),c(2),c(3),c(4)],D,r);
+   subplot(2,plot_size/2, j)
+   mesh(ff_a')
+   title(sprintf('c_1 = %f',c_j(j)))
+
+
+   a=zeros(N,1);                                 % Random initial state
+   b=zeros(N,1);                                 % Random initial state
+   a(1) = 0.14;
+end
+
+
+
+%% Question 6
+c_j = [0,0.4,0.8,1.2,1.6,2];
+
+a=zeros(N,1);                                 % Random initial state
+b=zeros(N,1);                                 % Random initial state
+a(1) = 0.14;
+
+plot_size = 6;
+
+for i=1:plot_size
+   for j = 1:plot_size
+       
+       
+       [ff_a, ff_b] = DGL_1D( a,b,T,N,[c_j(i),-c_j(j),c(3),c(4)],D,r);
+       subplot(plot_size,plot_size,(plot_size*(i-1) + j))
+       mesh(ff_a')
+       title(sprintf('c_1 = %f, c_2 = %f',c_j(i),-c_j(j)))
+       
+       
+       a=zeros(N,1);                                 % Random initial state
+       b=zeros(N,1);                                 % Random initial state
+       a(1) = 0.14;
+   end
+end
